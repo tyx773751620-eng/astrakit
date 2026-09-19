@@ -4,8 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AstraKit · 免费在线开发者工具</title>
-  <meta name="description" content="AstraKit 免费在线开发者工具：JSON/CSV 转换、时间戳转换、正则测试、身份证校验、银行卡 Luhn 校验。">
+  <meta name="description" content="AstraKit 免费在线开发者工具：JSON/CSV 转换、时间戳、正则测试、Base64/URL 编解码、SHA 散列、UUID 生成、JWT 解码、颜色转换、进制转换、身份证与银行卡校验。纯前端、免登录、数据不出浏览器。">
+  <meta name="keywords" content="在线工具,开发者工具,JSON转CSV,Base64,SHA256,UUID,JWT解码,时间戳,正则,颜色转换,进制转换">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AstraKit · 免费在线开发者工具">
+  <meta property="og:description" content="纯前端免费开发者工具集：编码、散列、UUID、JWT、转换、校验，数据不出浏览器。">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="canonical" href="https://astrakit.astrakit.workers.dev/">
   <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AstraKit",
+    "url": "https://astrakit.astrakit.workers.dev/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "inLanguage": "zh-CN",
+    "description": "免费在线开发者工具集，纯前端运行。",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" }
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -69,6 +89,73 @@
       <h2>银行卡号 Luhn 校验</h2>
       <input id="luhnInput" type="text" placeholder="请输入银行卡号（空格/连字符会自动忽略）">
       <div class="output-line" id="luhnOutput"></div>
+    </section>
+
+    <section class="tool" id="tool-b64" data-title="Base64/URL">
+      <h2>Base64 / URL 编解码</h2>
+      <textarea id="b64Input" rows="6" placeholder="输入要编码/解码的文本……"></textarea>
+      <div class="actions" style="flex-direction:row;margin:12px 0;flex-wrap:wrap">
+        <button data-b64="encode">Base64 编码</button>
+        <button data-b64="decode">Base64 解码</button>
+        <button data-b64="urlenc">URL 编码</button>
+        <button data-b64="urldec">URL 解码</button>
+      </div>
+      <textarea id="b64Output" rows="6" readonly></textarea>
+    </section>
+
+    <section class="tool" id="tool-hash" data-title="散列">
+      <h2>散列（SHA）</h2>
+      <div class="row">
+        <select id="hashAlgo" style="width:180px">
+          <option value="SHA-256">SHA-256</option>
+          <option value="SHA-1">SHA-1</option>
+          <option value="SHA-384">SHA-384</option>
+          <option value="SHA-512">SHA-512</option>
+        </select>
+        <button id="hashGo">计算</button>
+      </div>
+      <textarea id="hashInput" rows="4" placeholder="输入文本……"></textarea>
+      <div class="output-line" id="hashOutput"></div>
+    </section>
+
+    <section class="tool" id="tool-uuid" data-title="UUID">
+      <h2>UUID 生成器</h2>
+      <div class="row">
+        <input id="uuidCount" type="number" value="1" min="1" max="100" style="width:120px">
+        <button id="uuidGo">生成</button>
+      </div>
+      <pre class="output-line" id="uuidOutput"></pre>
+    </section>
+
+    <section class="tool" id="tool-jwt" data-title="JWT 解码">
+      <h2>JWT 解码（不验证签名）</h2>
+      <textarea id="jwtInput" rows="4" placeholder="粘贴 JWT（xxx.yyy.zzz）……"></textarea>
+      <pre class="output-line" id="jwtOutput"></pre>
+    </section>
+
+    <section class="tool" id="tool-color" data-title="颜色转换">
+      <h2>颜色转换</h2>
+      <div class="row">
+        <div>
+          <label>HEX</label>
+          <input id="colorHex" type="text" placeholder="#2563eb">
+        </div>
+        <div>
+          <label>RGB（r, g, b）</label>
+          <input id="colorRgb" type="text" placeholder="37, 99, 235">
+        </div>
+      </div>
+      <div class="output-line" id="colorOutput"></div>
+    </section>
+
+    <section class="tool" id="tool-base" data-title="进制转换">
+      <h2>进制转换（2~36）</h2>
+      <div class="row">
+        <input id="baseValue" type="text" placeholder="数值，例如 255 或 ff" style="flex:2">
+        <input id="baseFrom" type="number" value="10" min="2" max="36" placeholder="原进制" style="width:100px">
+        <input id="baseTo" type="number" value="16" min="2" max="36" placeholder="目标进制" style="width:100px">
+      </div>
+      <div class="output-line" id="baseOutput"></div>
     </section>
   </main>
 
