@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstraKit · 免费在线开发者工具</title>
+  <meta name="description" content="AstraKit 免费在线开发者工具：JSON/CSV 转换、时间戳转换、正则测试、身份证校验、银行卡 Luhn 校验。">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">AstraKit</div>
+    <nav id="nav"></nav>
+  </header>
+
+  <main>
+    <section class="tool" id="tool-json" data-title="JSON ↔ CSV">
+      <h2>JSON ↔ CSV 转换</h2>
+      <div class="cols">
+        <div>
+          <label>输入（JSON 或 CSV）</label>
+          <textarea id="jsonInput" rows="12" placeholder='[{"name":"张三","age":28}] 或  name,age&#10;张三,28'></textarea>
+        </div>
+        <div class="actions">
+          <button data-json="toCsv">JSON → CSV</button>
+          <button data-json="toJson">CSV → JSON</button>
+        </div>
+        <div>
+          <label>输出</label>
+          <textarea id="jsonOutput" rows="12" readonly></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool" id="tool-ts" data-title="时间戳">
+      <h2>Unix 时间戳 ↔ 日期</h2>
+      <div class="row">
+        <div>
+          <label>时间戳（秒或毫秒，自动识别）</label>
+          <input id="tsInput" type="text" placeholder="例如 1700000000 或 1700000000000">
+          <button id="tsToDate">时间戳 → 日期</button>
+        </div>
+        <div>
+          <label>日期（本地时间）</label>
+          <input id="dtInput" type="datetime-local">
+          <button id="dtToTs">日期 → 时间戳</button>
+        </div>
+      </div>
+      <div class="output-line" id="tsOutput"></div>
+    </section>
+
+    <section class="tool" id="tool-regex" data-title="正则测试">
+      <h2>正则表达式测试</h2>
+      <div class="row">
+        <input id="rxPattern" type="text" placeholder="正则，例如 (\d+)" style="flex:1">
+        <input id="rxFlags" type="text" placeholder="flags，例如 g" style="width:120px">
+      </div>
+      <textarea id="rxText" rows="8" placeholder="待匹配的文本……"></textarea>
+      <pre class="output-line" id="rxOutput"></pre>
+    </section>
+
+    <section class="tool" id="tool-id" data-title="身份证校验">
+      <h2>身份证号校验（18 位）</h2>
+      <input id="idInput" type="text" placeholder="请输入 18 位身份证号">
+      <div class="output-line" id="idOutput"></div>
+    </section>
+
+    <section class="tool" id="tool-luhn" data-title="银行卡校验">
+      <h2>银行卡号 Luhn 校验</h2>
+      <input id="luhnInput" type="text" placeholder="请输入银行卡号（空格/连字符会自动忽略）">
+      <div class="output-line" id="luhnOutput"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span id="stats">正在加载统计…</span>
+    <span class="tag">0 成本 · Cloudflare Workers 免费托管</span>
+  </footer>
+
+  <script src="/tools.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

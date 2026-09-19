@@ -1,0 +1,30 @@
+name: Daily Audit
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # 每日 UTC 00:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Health check
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" "https://${{ vars.ASTRAKIT_HOST }}/api/health" || echo "000")
+          echo "health_http=$code"
+      - name: Append ledger
+        run: |
+          line="{\"date\":\"$(date -u +%Y-%m-%d)\",\"health_http\":\"$(curl -s -o /dev/null -w '%{http_code}' https://${{ vars.ASTRAKIT_HOST }}/api/health || echo 000)\",\"cost_usd\":0,\"revenue_usd\":0,\"net_usd\":0}"
+          echo "$line" >> ledger.jsonl
+      - name: Commit ledger
+        run: |
+          git config user.name "astra-bot"
+          git config user.email "astra-bot@users.noreply.github.com"
+          git add ledger.jsonl
+          git commit -m "audit: daily ledger $(date -u +%Y-%m-%d)" || echo "no changes"
+          git push

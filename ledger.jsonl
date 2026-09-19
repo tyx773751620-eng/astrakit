@@ -1,0 +1,1 @@
+{"date":"bootstrap","health_http":"-","cost_usd":0,"revenue_usd":0,"net_usd":0,"note":"ledger schema: date=UTC日期, health_http=自检状态码, cost_usd=当日成本, revenue_usd=当日收入, net_usd=净额；0成本阶段全部为0"}
